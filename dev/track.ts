@@ -6,8 +6,8 @@ export class Track {
   date: Date;
 }
 
-class TrackId {
-  id: number;
+export class TrackId {
+  id: string;
   source: string;
 }
 
