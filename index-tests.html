@@ -37,6 +37,10 @@
       //     or explain what went wrong.
       .then(window.onload)
       .catch(console.error.bind(console));
+
+      System.import('app/track.spec')
+        .then(window.onload)
+        .catch(console.error.bind(console));
   </script>
 </body>
 </html>
