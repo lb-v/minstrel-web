@@ -1,0 +1,7 @@
+<h1>Search component</h1>
+<input type="search"  [(ngModel)]='keyword' placeholder="Search"/>
+<button class="glyphicon glyphicon-search" (click)="search()"></button>
+
+<div *ngFor='let displayedTrack of displayedTracks'>
+    <track-detail [track]="displayedTrack"></track-detail>
+</div>

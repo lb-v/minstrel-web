@@ -8,4 +8,7 @@ describe('Shopping list', () => {
   it('has name', () => {
     expect(list.shoppingListItems[0].name).toEqual("Milk");
   });
+  it('has length', () => {
+    expect(list.shoppingListItems.length).toEqual(3);
+  });
 });

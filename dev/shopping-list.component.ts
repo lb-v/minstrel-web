@@ -9,7 +9,7 @@ import {Component} from "@angular/core"
             (click)='onItemClicked(shoppingListItem)'
         >{{shoppingListItem.name}}</li>
       </ul>
-      
+
       <input type='text' [(ngModel)]='selectedItem.name' #shoppingListItem>
       <br/>
       <button (click)="onDeleteItem()">Delete Item</button>
