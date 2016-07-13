@@ -1,60 +1,22 @@
 import {Component} from '@angular/core';
 import {Track} from './track';
 import {TrackDetailComponent} from './track-detail.component'
+import {SearchService} from './search.service';
 
 @Component({
   selector: 'search',
   templateUrl: 'html/search.component.html',
-  directives: [TrackDetailComponent]
+  directives: [TrackDetailComponent],
+  providers: [SearchService]
 })
 
 export class SearchComponent {
     public keyword = "";
     public displayedTracks: Track[] = [];
 
-    search() {
-        this.displayedTracks = this.getTrackList(this.keyword);
-    }
+    constructor (private searchService: SearchService) {}
 
-    // TODO: to be removed
-    getTrackList(keyword) {
-        let tracks: Track[] = [{
-            id: {
-                id: 0,
-                source: "youtube"
-            },
-            title: "track1",
-            duration: {
-                millisecond: 1
-            },
-            thumbnail: "http://placekitten.com/80/60",
-            date: new Date()
-        },
-        {
-            id: {
-                id: 1,
-                source: "youtube"
-            },
-            title: "track2",
-            duration: {
-                millisecond: 1
-            },
-            thumbnail: "http://placekitten.com/80/60",
-            date: new Date()
-        },
-        {
-            id: {
-                id: 2,
-                source: "youtube"
-            },
-            title: "track3",
-            duration: {
-                millisecond: 1
-            },
-            thumbnail: "http://placekitten.com/80/60",
-            date: new Date()
-        }
-        ];
-        return tracks;
+    search() {
+        this.displayedTracks = this.searchService.getTracks(this.keyword);
     }
 }
