@@ -28,19 +28,9 @@
       }
     });
 
-    // #3. Import the spec file explicitly
-    System.import('app/shopping-list.spec')
-
-      // #4. wait for all imports to load ...
-      //     then re-execute `window.onload` which
-      //     triggers the Jasmine test-runner start
-      //     or explain what went wrong.
+    System.import('app/track.spec')
       .then(window.onload)
       .catch(console.error.bind(console));
-
-      System.import('app/track.spec')
-        .then(window.onload)
-        .catch(console.error.bind(console));
   </script>
 </body>
 </html>
