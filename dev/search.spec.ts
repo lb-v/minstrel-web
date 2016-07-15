@@ -21,7 +21,7 @@ describe('Search Service', () => {
     ];
   });
 
-  it('should get tracks', 
+  it('should get track id', 
     inject([XHRBackend, SearchService], (mockBackend, searchService) => {
 
     mockBackend.connections.subscribe(
@@ -38,11 +38,37 @@ describe('Search Service', () => {
       }
     );
       
-    searchService.getTracks().subscribe((tracks: TrackId[]) => {
+    searchService.getTrackIds().subscribe((tracks: TrackId[]) => {
       expect(tracks.length).toBe(1);
       expect(tracks[0].id).toBe("sometrackid")
     });
+  }));
 
+  it('should get track', 
+    inject([XHRBackend, SearchService], (mockBackend, searchService) => {
+
+    mockBackend.connections.subscribe(
+      (connection: MockConnection) => {
+        connection.mockRespond(new Response(
+          new ResponseOptions({
+              body: [
+                {
+                  id: {id: "fk4BbF7B29w", source: "YouTube"},
+                  title: "Adele - Send My Love (To Your New Lover)",
+                  duration: "PT3M46S"
+                }]
+          }
+        )));
+      }
+    );
+      
+    var dummyTrack: TrackId = {
+        id: "sometrackid",
+        source: "somesourceid"
+    }
+    searchService.getTrack(dummyTrack).subscribe((track: Track) => {
+      expect(track.id.source).toBe("YouTube");
+    });
   }));
 
 });

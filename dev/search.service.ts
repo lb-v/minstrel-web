@@ -10,19 +10,29 @@ export class SearchService {
 
     private serverUrl = 'http://51.254.143.122:8080/v1/'
 
-    getTracks(keyword: string): Observable<TrackId[]> {
-        return this.http.get(this.serverUrl + "TrackIDs?q="+keyword)
+    getTrackIds(keyword: string): Observable<TrackId[]> {
+        return this.http.get(this.serverUrl + "TrackIDs?q=" + keyword)
                         .map(this.extractIDs)
                         .catch(this.handleError);
     }
 
+    getTrack(id: TrackId): Observable<Track> {
+        return this.http.get(this.serverUrl + "Tracks?ids=" + JSON.stringify(id))
+                        .map(this.extractTrack)
+                        .catch(this.handleError);
+    }
+
     private extractIDs(res: Response) {
+        return res.json();
+    }
+
+    private extractTrack(res: Response) {
         let body = res.json();
-        var trackIDs : TrackId[] = [];
-        for (var index = 0; index < body.length; index++) {
-            trackIDs.push(body[index]);
+        // should always contain only one entry. If not, that's an error
+        if (body.length != 1) {
+            return {};
         }
-        return trackIDs;
+        return body[0];
     }
 
     private handleError (error: any) {
