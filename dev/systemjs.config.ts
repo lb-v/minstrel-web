@@ -20,12 +20,14 @@
         'common',
         'compiler',
         'core',
-        'http',
         'platform-browser',
         'platform-browser-dynamic',
         'router',
         'router-deprecated',
         'upgrade',
+    ];
+    var ngIndexPackageNames = [
+        'http'
     ];
     // Individual files (~300 requests):
     function ngPackageIndex(pkgName) {
@@ -40,6 +42,7 @@
     }
     // Add package entries for angular packages
     ngPackageNames.forEach(packUmd);
+    ngIndexPackageNames.forEach(ngPackageIndex);
     var config = {
         map: map,
         packages: packages
