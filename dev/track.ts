@@ -14,3 +14,8 @@ export class TrackId {
 class Duration {
   millisecond: number;
 }
+
+class Thumbnail {
+  default: string;
+  high: string;
+}

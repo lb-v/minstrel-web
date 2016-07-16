@@ -55,7 +55,11 @@ describe('Search Service', () => {
                 {
                   id: {id: "fk4BbF7B29w", source: "YouTube"},
                   title: "Adele - Send My Love (To Your New Lover)",
-                  duration: "PT3M46S"
+                  duration: "PT3M46S",
+                  thumbnail: {
+                    default: "test.png",
+                    high: "none"
+                  }
                 }]
           }
         )));
@@ -68,6 +72,7 @@ describe('Search Service', () => {
     }
     searchService.getTrack(dummyTrack).subscribe((track: Track) => {
       expect(track.id.source).toBe("YouTube");
+      expect(track.thumbnail.default).toBe("test.png");
     });
   }));
 

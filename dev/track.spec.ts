@@ -10,7 +10,10 @@ describe('Track', () => {
     duration: {
       millisecond: 120
     },
-    thumbnail: "sdfsf",
+    thumbnail: {
+      default: "sdfsf",
+      high: "none"
+    },
     date: new Date()
   }
 
