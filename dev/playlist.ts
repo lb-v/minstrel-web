@@ -27,10 +27,3 @@ export class Playlist {
         return this.tracks.length;
     }
 }
-
-export enum Position {
-    First = 0,
-    Current = 1,
-    Next = 2,
-    Last = 3
-}
