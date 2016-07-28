@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var clean = require('gulp-clean');
 
 var assetsDev = 'assets/';
 var assetsProd = 'src/';
@@ -24,6 +25,11 @@ var typescript = require('gulp-typescript');
 var imagemin = require('gulp-imagemin');
 
 var tsProject = typescript.createProject('tsconfig.json');
+
+gulp.task('clean', function () {
+    return gulp.src(appProd, {read: false})
+        .pipe(clean());
+});
 
 gulp.task('build-css', function () {
     return gulp.src(assetsDev + 'scss/*.scss')
@@ -62,4 +68,5 @@ gulp.task('watch', function () {
     gulp.watch(assetsDev + 'img/*', ['build-img']);
 });
 
-gulp.task('default', ['watch', 'build-ts', 'build-css']);
+gulp.task('build',  ['clean', 'build-ts', 'build-css']);
+gulp.task('default', ['clean', 'watch', 'build-ts', 'build-css']);
