@@ -20,16 +20,20 @@
         'common',
         'compiler',
         'core',
-        'http',
         'platform-browser',
         'platform-browser-dynamic',
         'router',
         'router-deprecated',
         'upgrade',
     ];
+    // Fix for https://github.com/angular/angular/issues/9170
+    // make the MockBackend fail in tests if added to ngPackageNames
+    var ngIndexPackageNames = [
+        'http'
+    ];
 
     // Individual files (~300 requests):
-    function ngPackageIndex(pkgName) {
+    function packIndex(pkgName) {
         packages['@angular/' + pkgName] = { main: 'index.js', defaultExtension: 'js' };
     }
 
@@ -43,6 +47,7 @@
 
     // Add package entries for angular packages
     ngPackageNames.forEach(packUmd);
+    ngIndexPackageNames.forEach(packIndex);
 
     var config = {
         map: map,

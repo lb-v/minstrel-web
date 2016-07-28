@@ -2,7 +2,7 @@ export class Track {
   id: TrackId;
   duration: Duration;
   title: string;
-  thumbnail: string;
+  thumbnail: Thumbnail;
   date: Date;
 }
 

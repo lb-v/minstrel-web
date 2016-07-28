@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class SearchService {
-    constructor (private http: Http) {}
+    constructor (private http: Http) {
+    }
 
     private serverUrl = 'http://51.254.143.122:8080/v1/'
 
@@ -23,7 +24,7 @@ export class SearchService {
     }
 
     private extractIDs(res: Response) {
-        return res.json();
+        return res.json()["IDs"];
     }
 
     private extractTrack(res: Response) {
