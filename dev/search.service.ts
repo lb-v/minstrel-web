@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 
-import {Track, TrackId} from './track';
+import {Track, TrackId, TrackIdList} from './track';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -11,8 +11,15 @@ export class SearchService {
 
     private serverUrl = 'http://51.254.143.122:8080/v1/'
 
-    getTrackIds(keyword: string): Observable<TrackId[]> {
+    getTrackIds(keyword: string): Observable<TrackIdList> {
         return this.http.get(this.serverUrl + "TrackIDs?q=" + keyword)
+                        .map(this.extractIDs)
+                        .catch(this.handleError);
+    }
+
+    getNextTrackIds(keyword: string, nextPageToken: string): Observable<TrackIdList> {
+        let URL = this.serverUrl + "TrackIDs?q=" + keyword + "&pageToken=" + nextPageToken;
+        return this.http.get(URL)
                         .map(this.extractIDs)
                         .catch(this.handleError);
     }
@@ -23,8 +30,11 @@ export class SearchService {
                         .catch(this.handleError);
     }
 
-    private extractIDs(res: Response) {
-        return res.json()["IDs"];
+    private extractIDs(res: Response): TrackIdList {
+        return {
+            IDs: res.json()["IDs"], 
+            NextPageToken: res.json()["NextPageToken"]
+        };
     }
 
     private extractTrack(res: Response) {

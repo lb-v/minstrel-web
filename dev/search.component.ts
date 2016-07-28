@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Track, TrackId} from './track';
+import {Track, TrackId, TrackIdList} from './track';
 import {TrackDetailComponent} from './track-detail.component'
 import {SearchService} from './search.service';
 
@@ -15,19 +15,39 @@ export class SearchComponent {
     public displayedTracks: Track[] = [];
     public errorMessage = "";
 
+    private lastSearchKeyword = "";
+    private nextPageToken = "";
+
     constructor (private searchService: SearchService) {}
 
     search() {
+        this.lastSearchKeyword = this.keyword;
         var observable = this.searchService.getTrackIds(this.keyword);
         observable.subscribe(
-            (tracks: TrackId[]) => {
-                this.setTrackIds(tracks);
+            (trackIdList: TrackIdList) => {
+                this.nextPageToken = trackIdList.NextPageToken;
+                this.setTrackIds(trackIdList.IDs);
+            }
+        );
+    }
+
+    loadNextPage() {
+        var observable = this.searchService.getNextTrackIds(this.lastSearchKeyword, 
+                                                            this.nextPageToken);
+        observable.subscribe(
+            (trackIdList: TrackIdList) => {
+                this.nextPageToken = trackIdList.NextPageToken;
+                this.addTrackIds(trackIdList.IDs);
             }
         );
     }
 
     setTrackIds(trackIds: TrackId[]) {
         this.displayedTracks = [];
+        this.addTrackIds(trackIds);
+    }
+
+    addTrackIds(trackIds: TrackId[]) {
         for (var index = 0; index < trackIds.length; index++) {
             var trackObs = this.searchService.getTrack(trackIds[index]);
             trackObs.subscribe(

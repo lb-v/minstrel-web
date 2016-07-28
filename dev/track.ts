@@ -11,6 +11,11 @@ export class TrackId {
   source: string;
 }
 
+export class TrackIdList {
+  IDs: TrackId[];
+  NextPageToken: string;
+}
+
 class Duration {
   millisecond: number;
 }

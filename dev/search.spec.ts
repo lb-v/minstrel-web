@@ -16,7 +16,7 @@ import 'rxjs/Rx'
 
 import {SearchService} from './search.service';
 import {SearchComponent} from './search.component';
-import {Track, TrackId} from './track';
+import {Track, TrackId, TrackIdList} from './track';
 
 export function main() {
   describe('Search Service', () => {
@@ -51,9 +51,39 @@ export function main() {
           }
         );
         
-        searchService.getTrackIds("toto").subscribe((tracks: TrackId[]) => {
-          expect(tracks.length).toBe(5);
-          expect(tracks[0].id).toBe("fk4BbF7B29w")
+        searchService.getTrackIds("toto").subscribe((trackIds: TrackIdList) => {
+          expect(trackIds.IDs.length).toBe(5);
+          expect(trackIds.IDs[0].id).toBe("fk4BbF7B29w")
+          expect(trackIds.NextPageToken).toBe("CAUQAA")
+        });
+      }
+    ));
+
+    it('should get next page of track ids', 
+      inject([XHRBackend, SearchService], (mockBackend, searchService) => {
+        
+        mockBackend.connections.subscribe(
+          (connection: MockConnection) => {
+            connection.mockRespond(new Response(
+              new ResponseOptions({
+                  body: {
+                    IDs:[
+                      {id: "rYEDA3JcQqw", source: "YouTube"},
+                      {id: "4aKteL3vMvU", source: "YouTube"},
+                      {id: "OHXjxWaQs9o", source: "YouTube"},
+                      {id: "HDpCv71r-0U", source: "YouTube"},
+                      {id: "Ri7-vnrJD3k", source: "YouTube"}
+                    ],
+                    NextPageToken: "CAoQAA"}
+              }
+            )));
+          }
+        );
+        
+        searchService.getNextTrackIds("toto", "CAUQAA").subscribe((trackIds: TrackIdList) => {
+          expect(trackIds.IDs.length).toBe(5);
+          expect(trackIds.IDs[0].id).toBe("rYEDA3JcQqw")
+          expect(trackIds.NextPageToken).toBe("CAoQAA")
         });
       }
     ));
