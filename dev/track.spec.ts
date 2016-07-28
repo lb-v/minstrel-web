@@ -1,9 +1,15 @@
-import { Track } from './track.ts'
+import {
+    describe, 
+    expect, 
+    it} from '@angular/core/testing';
+
+import { Track, TrackId } from './track.ts'
 
 describe('Track', () => {
-  var track: Track = {
+  let track: Track;
+  track = {
     id: {
-      id: 0,
+      id: "someTrackId",
       source: "youtube"
     },
     title: "Toto",
@@ -16,7 +22,6 @@ describe('Track', () => {
     },
     date: new Date()
   }
-
 
   it('has title', () => {
     expect(track.title).toEqual("Toto");
