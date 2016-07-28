@@ -10,6 +10,7 @@ track-detail.wide .thumbnail {
   display: inline-flex;
   border: none;
   box-shadow: none;
+  width: inherit;
 }
 
 track-detail.wide .title {
@@ -29,4 +30,9 @@ track-detail .title {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+/* TODO: make it responsive... */
+track-detail .thumbnail {
+  width: 100px;
 }

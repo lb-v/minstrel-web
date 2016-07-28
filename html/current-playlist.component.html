@@ -1,5 +1,9 @@
-<div *ngIf="playlistModel.manager" class="row">
-    <div *ngFor='let track of playlistModel.manager.tracks' class="col-xs-1">
-        <track-detail [track]="track"></track-detail>
-    </div>
+<div *ngIf="playlistModel.manager" class="table-responsive">
+    <table class="table" style="width: auto">
+        <tbody>
+            <td *ngFor='let track of playlistModel.manager.tracks'>
+                <track-detail [track]="track"></track-detail>
+            </td>
+        </tbody>
+    </table>
 </div>
