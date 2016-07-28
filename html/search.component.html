@@ -3,7 +3,7 @@
 <button class="glyphicon glyphicon-search" (click)="search()"></button>
 
 <div *ngFor='let displayedTrack of displayedTracks'>
-    <track-detail [track]="displayedTrack"></track-detail>
+    <track-detail [track]="displayedTrack" (click)="cueToPlaylist(displayedTrack)"></track-detail>
 </div>
 
 <button *ngIf="nextPageToken" (click)="loadNextPage()">Load more...</button>

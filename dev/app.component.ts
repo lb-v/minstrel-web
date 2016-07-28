@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {SearchComponent} from './search.component';
+import {CurrentPlaylistComponent} from './current-playlist.component';
+
+import {PlaylistModel} from './playlist.model';
 
 import './rxjs-operators';
 
@@ -7,9 +10,14 @@ import './rxjs-operators';
     selector: 'my-app',
     templateUrl: 'html/app.component.html',
     directives: [
-        SearchComponent
-    ]
+        SearchComponent,
+        CurrentPlaylistComponent
+    ],
+    providers: [PlaylistModel]
 })
-export class AppComponent {
 
+export class AppComponent {
+    constructor(private playlistModel: PlaylistModel) {
+        console.log("from AppComponent, " playlistModel.test);
+    }
 }

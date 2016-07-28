@@ -1,0 +1,6 @@
+<h1>Current playlist Component</h1>
+<div *ngIf="playlistModel.manager">
+    <div *ngFor='let track of playlistModel.manager.tracks'>
+        {{track.title}}
+    </div>
+</div>
