@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "youtube": "github:DefinitelyTyped/DefinitelyTyped/youtube/youtube.d.ts#069003c1d2038c1123b84c60d73d93e8e227b22a"
+  }
+}
