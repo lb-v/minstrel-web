@@ -5,3 +5,5 @@
 <div *ngFor='let displayedTrack of displayedTracks'>
     <track-detail [track]="displayedTrack"></track-detail>
 </div>
+
+<button *ngIf="nextPageToken" (click)="loadNextPage()">Load more...</button>
