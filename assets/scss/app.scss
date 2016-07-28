@@ -4,3 +4,29 @@ body {
   font-family: "Roboto", Arial, sans-serif;
   font-size: 16px;
 }
+
+/* if wide, show thumbnail on the left and info on the right */
+track-detail.wide .thumbnail {
+  display: inline-flex;
+  border: none;
+  box-shadow: none;
+}
+
+track-detail.wide .title {
+  font-weight: bold;
+}
+track-detail.wide .duration {
+  font-size: inherit;
+}
+
+/* hide duration if not wide */
+track-detail .duration {
+  font-size: 0px;
+}
+
+/* track title should always be on one line */
+track-detail .title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

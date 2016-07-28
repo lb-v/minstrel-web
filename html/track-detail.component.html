@@ -1,9 +1,8 @@
-<div *ngIf="track" class="media">
-        <div class="media-left">
-                <p><img src="{{ track.thumbnail.default }}" height="120px"></p>
-        </div>
-        <div class="media-body">
-                <h1 class="media-heading">{{ track.title }}</h1>
-                {{ track.duration.millisecond }}
+<div *ngIf="track" class="thumbnail">
+        <img src="{{ track.thumbnail.default }}">
+        <div class="caption">
+                <div class="title">{{ track.title }}</div>
+                <div class="duration">{{ track.duration.millisecond }}</div>
         </div>
 </div>
+
