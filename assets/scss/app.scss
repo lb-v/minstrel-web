@@ -36,3 +36,7 @@ track-detail .title {
 track-detail .thumbnail {
   width: 100px;
 }
+
+track-detail.selected .thumbnail {
+  background-color: #89A8B3;
+}

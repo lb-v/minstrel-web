@@ -1,8 +1,16 @@
 <div *ngIf="playlistModel.manager" class="table-responsive">
     <table class="table" style="width: auto">
         <tbody>
-            <td *ngFor='let track of playlistModel.manager.tracks'>
-                <track-detail [track]="track"></track-detail>
+            <td *ngFor='let track of playlistModel.manager.tracks; let i = index'>
+                <track-detail
+                  *ngIf="i == playlistModel.manager.currentIndex" 
+                  class="selected"
+                  [track]="track"></track-detail>
+
+                <track-detail
+                  *ngIf="i != playlistModel.manager.currentIndex"
+                  [track]="track"
+                  (click)="selectedTrackIndex(i)"></track-detail>
             </td>
         </tbody>
     </table>

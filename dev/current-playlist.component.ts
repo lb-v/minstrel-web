@@ -12,4 +12,8 @@ import {TrackDetailComponent} from './track-detail.component'
 
 export class CurrentPlaylistComponent {
     constructor (private playlistModel: PlaylistModel) {}
+
+    selectedTrackIndex(index: number) {
+      this.playlistModel.manager.currentIndex = index;
+    }
 }
