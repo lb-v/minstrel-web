@@ -12,12 +12,8 @@ import './rxjs-operators';
     directives: [
         SearchComponent,
         CurrentPlaylistComponent
-    ],
-    providers: [PlaylistModel]
+    ]
 })
 
 export class AppComponent {
-    constructor(private playlistModel: PlaylistModel) {
-        console.log("from AppComponent, " playlistModel.test);
-    }
 }
