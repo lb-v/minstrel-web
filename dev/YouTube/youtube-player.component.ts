@@ -6,7 +6,7 @@ import { window } from '@angular/platform-browser/src/facade/browser';
     selector: 'youtube-player',
     template: `
         <h1> the youtube player ! </h1>   
-        <div id="player"></div>
+        <div id="player" style="pointer-events: none"></div>
     `
 })
 
@@ -31,7 +31,7 @@ export class YouTubePlayerComponent implements OnInit {
         this.player = new window.YT.Player("player", {
             height: '390',
             width: '640',
-            videoId: 'M7lc1UVf-VE'
+            videoId: ''
         });
     }
 }
