@@ -30,17 +30,13 @@ export class PlaylistManager extends Playlist {
     }
     
     cueToPosition(track: Track, position: Position) {
+        var cuePosition = 0;
         switch (position) {
             case Position.First: 
-                this.cue(track, 0);
+                cuePosition = 0;
                 break;
-            case Position.Current:
-                this.cue(track, this.currentIndex_);
-                // call event listener if any
-                if (this.eventListener == null) {
-                    return;
-                }
-                this.eventListener.onCurrentTrackChanged();
+            case Position.Current: 
+                cuePosition = this.currentIndex_;
                 break;
 
             case Position.Next:
@@ -48,13 +44,21 @@ export class PlaylistManager extends Playlist {
                     this.cueToPosition(track, Position.Last);
                     return;
                 }
-                this.cue(track, this.currentIndex_ + 1);
+                cuePosition = this.currentIndex_ + 1;
                 break;
 
             case Position.Last:
-                this.cue(track, Math.max(this.length(), 0));
+                cuePosition = Math.max(this.length(), 0);
                 break;
         }
+        this.cue(track, cuePosition);
+        
+        // call event listener and cuePosition is the current one
+        if (this.eventListener == null || 
+            cuePosition != this.currentIndex_) {
+            return;
+        }
+        this.eventListener.onCurrentTrackChanged();
     }
 
     currentTrack() {
