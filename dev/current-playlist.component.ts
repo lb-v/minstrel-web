@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {PlaylistManager} from './playlist-manager';
-import {PlaylistModel} from './playlist.model';
+import {PlaylistService} from './playlist.service';
 import {TrackDetailComponent} from './track-detail.component'
 
 @Component({
@@ -11,9 +11,9 @@ import {TrackDetailComponent} from './track-detail.component'
 })
 
 export class CurrentPlaylistComponent {
-    constructor (private playlistModel: PlaylistModel) {}
+    constructor (private playlistService: PlaylistService) {}
 
     selectedTrackIndex(index: number) {
-      this.playlistModel.manager.currentIndex = index;
+      this.playlistService.manager.currentIndex = index;
     }
 }

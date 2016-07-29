@@ -4,8 +4,6 @@ import {SearchComponent} from './search.component';
 import {CurrentPlaylistComponent} from './current-playlist.component';
 import {YouTubePlayerComponent} from './YouTube/youtube-player.component';
 
-import {PlaylistModel} from './playlist.model';
-
 import './rxjs-operators';
 
 @Component({

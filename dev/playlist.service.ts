@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {PlaylistManager, Position} from './playlist-manager';
 import {Track} from './track'
 
-export class PlaylistModel {
+export class PlaylistService {
     // the current playlist
     public manager = new PlaylistManager();
 

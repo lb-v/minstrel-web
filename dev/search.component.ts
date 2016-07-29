@@ -4,7 +4,7 @@ import {TrackDetailComponent} from './track-detail.component'
 import {SearchService} from './search.service';
 
 import {Position} from './playlist-manager';
-import {PlaylistModel} from './playlist.model';
+import {PlaylistService} from './playlist.service';
 
 @Component({
   selector: 'search',
@@ -22,7 +22,7 @@ export class SearchComponent {
     private nextPageToken = "";
 
     constructor (private searchService: SearchService, 
-                 private playlistModel: PlaylistModel) {}
+                 private playlistService: PlaylistService) {}
 
     search() {
         this.lastSearchKeyword = this.keyword;
@@ -66,6 +66,6 @@ export class SearchComponent {
     }
 
     cueToPlaylist(track: Track) {
-        this.playlistModel.manager.cueToPosition(track, Position.Next);
+        this.playlistService.manager.cueToPosition(track, Position.Next);
     }
 }

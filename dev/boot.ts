@@ -3,10 +3,10 @@ import {provide} from '@angular/core';
 import {AppComponent} from "./app.component";
 
 import {HTTP_PROVIDERS} from '@angular/http';
-import {PlaylistModel} from "./playlist.model";
+import {PlaylistService} from "./playlist.service";
 
 bootstrap(AppComponent, 
           [ 
             HTTP_PROVIDERS, 
-            provide(PlaylistModel, {useValue: new PlaylistModel()}) 
+            provide(PlaylistService, {useValue: new PlaylistService()}) 
           ]);
