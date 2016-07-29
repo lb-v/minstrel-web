@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {PlaylistManager, Position} from './playlist-manager';
-import {Track} from './track'
+import {Track} from '../track'
 
 export class PlaylistService {
     // the current playlist

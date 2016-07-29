@@ -5,7 +5,7 @@ import {
     it} from '@angular/core/testing';
 
 import { PlaylistManager, Position } from './playlist-manager'
-import { Track } from './track'
+import { Track } from '../track'
 
 export function main() {
   describe('Playlist Manager', () => {

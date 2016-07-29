@@ -3,7 +3,7 @@ import {provide} from '@angular/core';
 import {AppComponent} from "./app.component";
 
 import {HTTP_PROVIDERS} from '@angular/http';
-import {PlaylistService} from "./playlist.service";
+import {PlaylistService} from "./Playlist/playlist.service";
 import {PlayerFactory} from "./Player/player.factory";
 
 bootstrap(AppComponent, 

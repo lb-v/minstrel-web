@@ -5,7 +5,7 @@ import {
     it} from '@angular/core/testing';
 
 import { Playlist } from './playlist'
-import { Track } from './track'
+import { Track } from '../track'
 
 export function main() {
   describe('Playlist', () => {

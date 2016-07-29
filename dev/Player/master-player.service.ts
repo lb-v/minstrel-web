@@ -1,4 +1,4 @@
-import {PlaylistManager} from '../playlist-manager';
+import {PlaylistManager} from '../Playlist/playlist-manager';
 
 export class MasterPlayerService {
     constructor(private playlist: PlaylistManager) {}

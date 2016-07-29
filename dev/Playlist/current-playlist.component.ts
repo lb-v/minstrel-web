@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {PlaylistManager} from './playlist-manager';
 import {PlaylistService} from './playlist.service';
-import {TrackDetailComponent} from './track-detail.component'
+import {TrackDetailComponent} from '../track-detail.component'
 
 @Component({
   selector: 'current-playlist',

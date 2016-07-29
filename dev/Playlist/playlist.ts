@@ -1,4 +1,4 @@
-import {Track} from './track';
+import {Track} from '../track';
 
 // Playlist represent a list of tracks. It doesn't represent the current playlist. 
 // That means that it doesn't integrate a current index and you can't cue a song on 

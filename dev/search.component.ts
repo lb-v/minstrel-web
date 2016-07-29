@@ -3,8 +3,8 @@ import {Track, TrackId, TrackIdList} from './track';
 import {TrackDetailComponent} from './track-detail.component'
 import {SearchService} from './search.service';
 
-import {Position} from './playlist-manager';
-import {PlaylistService} from './playlist.service';
+import {Position} from './Playlist/playlist-manager';
+import {PlaylistService} from './Playlist/playlist.service';
 
 @Component({
   selector: 'search',

@@ -1,5 +1,5 @@
 import {Playlist} from './playlist';
-import {Track} from './track';
+import {Track} from '../track';
 
 // PlaylistManager manages a playlist. 
 // It keeps the current index and ease the use of the playlist object
