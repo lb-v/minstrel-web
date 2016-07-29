@@ -1,4 +1,4 @@
-/// <reference path="../../typings/globals/youtube/index.d.ts" />
+/// <reference path="../../../typings/globals/youtube/index.d.ts" />
 import {Component, OnInit} from '@angular/core';
 import { window } from '@angular/platform-browser/src/facade/browser';
 

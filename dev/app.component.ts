@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {SearchComponent} from './search.component';
 import {CurrentPlaylistComponent} from './current-playlist.component';
-import {YouTubePlayerComponent} from './YouTube/youtube-player.component';
+import {YouTubePlayerComponent} from './Player/YouTube/youtube-player.component';
 
 import './rxjs-operators';
 
