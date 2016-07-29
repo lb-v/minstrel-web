@@ -4,8 +4,8 @@ import {MasterPlayerService} from './master-player.service';
 @Component({
     selector: 'master-player',
     template: `
-        <button (click)="play">Play</button>
-        <button (click)="pause">Pause</button>
+        <button (click)="play()">Play</button>
+        <button (click)="pause()">Pause</button>
     `
 })
 

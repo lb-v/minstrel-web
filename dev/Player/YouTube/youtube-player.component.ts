@@ -2,6 +2,8 @@
 import {Component, OnInit} from '@angular/core';
 import { window } from '@angular/platform-browser/src/facade/browser';
 
+import {YouTubePlayer} from './youtube-player';
+
 @Component({
     selector: 'youtube-player',
     template: `
@@ -11,7 +13,7 @@ import { window } from '@angular/platform-browser/src/facade/browser';
 })
 
 export class YouTubePlayerComponent implements OnInit {
-    private player: YT.Player;
+    constructor(private youtubePlayer: YouTubePlayer) {} 
 
     ngOnInit() {
         this.setupPlayer();
@@ -19,19 +21,10 @@ export class YouTubePlayerComponent implements OnInit {
 
     setupPlayer() {
         window['onYouTubeIframeAPIReady'] = () => {
-            this.createPlayer();
+            this.youtubePlayer.init("player");
         }
         if (window.YT && window.YT.Player) {
-            this.createPlayer();
+            this.youtubePlayer.init("player");
         }
-    }
-
-    createPlayer() {
-        console.log("Create player !");
-        this.player = new window.YT.Player("player", {
-            height: '390',
-            width: '640',
-            videoId: ''
-        });
     }
 }

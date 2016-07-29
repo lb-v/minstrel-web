@@ -4,15 +4,24 @@ import {AppComponent} from "./app.component";
 
 import {HTTP_PROVIDERS} from '@angular/http';
 import {PlaylistService} from "./Playlist/playlist.service";
+
 import {PlayerFactory} from "./Player/player.factory";
+import {Player} from "./Player/player";
 import {MasterPlayerService} from "./Player/master-player.service";
+import {YouTubePlayer} from "./Player/YouTube/youtube-player";
 
 var gPlaylistService = new PlaylistService();
+
+// register each player here
+var gPlayerFactory = new PlayerFactory();
+var gYouTubePlayer = new YouTubePlayer();
+gPlayerFactory.register(gYouTubePlayer, "YouTube");
 
 bootstrap(AppComponent, 
           [ 
             HTTP_PROVIDERS, 
             provide(PlaylistService, {useValue: gPlaylistService}) ,
-            provide(PlayerFactory, {useValue: new PlayerFactory()}),
+            provide(PlayerFactory, {useValue: gPlayerFactory}),
+            provide(YouTubePlayer, {useValue: gYouTubePlayer}),
             provide(MasterPlayerService, {useValue: new MasterPlayerService(gPlaylistService.manager)})
           ]);
