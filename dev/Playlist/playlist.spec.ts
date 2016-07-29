@@ -17,7 +17,7 @@ export function main() {
     beforeEach(() => {
         playlist = new Playlist();
         
-        trackOne = new Track(null,
+        trackOne = new Track(
             { id: "1", source: "" },
             "trackOne",
             { millisecond: 0 },
@@ -25,7 +25,7 @@ export function main() {
             new Date()
         );
         
-        trackTwo = new Track(null,
+        trackTwo = new Track(
             { id: "2", source: "" },
             "trackTwo",
             { millisecond: 0 },
@@ -33,7 +33,7 @@ export function main() {
             new Date()
         );
         
-        trackThree = new Track(null,
+        trackThree = new Track(
             { id: "3", source: "" },
             "trackThree",
             { millisecond: 0 },

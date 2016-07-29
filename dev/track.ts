@@ -6,15 +6,13 @@ export class Track {
   public title: string;
   public thumbnail: Thumbnail;
   public date: Date;
-  private factory: PlayerFactory;
+  private factory: PlayerFactory = null;
 
-  constructor(playerFactory: PlayerFactory,
-              id: TrackId, 
+  constructor(id: TrackId, 
               title: string, 
               duration: Duration, 
               thumbnail: Thumbnail, 
               date: Date) {
-    this.factory = playerFactory;
     this.id = id;
     this.duration = duration;
     this.title = title;
@@ -22,17 +20,28 @@ export class Track {
     this.date = date;  
   }
 
+  init(playerFactory: PlayerFactory) {
+    this.factory = playerFactory
+  }
+
+  private getPlayer() {
+    return this.factory.get(this.id.source);
+  }
+
   load() {
-    
+    this.getPlayer().load(this.id.id);
   }
   play() {
-
+    // TODO: if loaded
+    this.getPlayer().play();
   }
   pause() {
-    
+    // TODO: if loaded
+    this.getPlayer().pause();
   }
   seekTo(millisecond: Number) {
-
+    // TODO: if loaded
+    this.getPlayer().seekTo(millisecond);
   }
 }
 

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 
 import {SearchComponent} from './search.component';
 import {CurrentPlaylistComponent} from './Playlist/current-playlist.component';
+import {MasterPlayerComponent} from './Player/master-player.component';
 import {YouTubePlayerComponent} from './Player/YouTube/youtube-player.component';
 
 import './rxjs-operators';
@@ -12,6 +13,7 @@ import './rxjs-operators';
     directives: [
         SearchComponent,
         CurrentPlaylistComponent,
+        MasterPlayerComponent,
         YouTubePlayerComponent
     ]
 })

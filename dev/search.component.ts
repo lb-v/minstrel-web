@@ -5,6 +5,7 @@ import {SearchService} from './search.service';
 
 import {Position} from './Playlist/playlist-manager';
 import {PlaylistService} from './Playlist/playlist.service';
+import {PlayerFactory} from './Player/player.factory';
 
 @Component({
   selector: 'search',
@@ -22,7 +23,8 @@ export class SearchComponent {
     private nextPageToken = "";
 
     constructor (private searchService: SearchService, 
-                 private playlistService: PlaylistService) {}
+                 private playlistService: PlaylistService,
+                 private playerFactory: PlayerFactory) {}
 
     search() {
         this.lastSearchKeyword = this.keyword;
@@ -59,6 +61,7 @@ export class SearchComponent {
                     if (track == null) {
                         return;
                     }
+                    track.init(this.playerFactory);
                     this.displayedTracks.push(track);
                 }
             );

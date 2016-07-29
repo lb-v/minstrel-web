@@ -7,15 +7,28 @@ export class MasterPlayerService implements PlaylistEventListener {
     }
 
     onCurrentTrackChanged() {
-        console.log("Current track changed !!");
+        this.playlist.currentTrack().load();
     }
 
     play() {
-
+        if (this.playlist.length() == 0) {
+            return;
+        }
+        this.playlist.currentTrack().play();
     }
 
     pause() {
+        if (this.playlist.length() == 0) {
+            return;
+        }
+        this.playlist.currentTrack().pause();
+    }
 
+    seekTo(millisecond: Number) {
+        if (this.playlist.length() == 0) {
+            return;
+        }
+        this.playlist.currentTrack().seekTo(millisecond);
     }
 
     next() {
@@ -23,10 +36,6 @@ export class MasterPlayerService implements PlaylistEventListener {
     }
 
     previous() {
-
-    }
-
-    seekTo(millisecond: Number) {
 
     }
 }
