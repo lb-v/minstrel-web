@@ -14,6 +14,6 @@ export class CurrentPlaylistComponent {
     constructor (private playlistService: PlaylistService) {}
 
     selectedTrackIndex(index: number) {
-      this.playlistService.manager.currentIndex = index;
+      this.playlistService.manager.setCurrentIndex(index);
     }
 }

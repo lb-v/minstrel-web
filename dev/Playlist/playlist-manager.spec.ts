@@ -52,30 +52,30 @@ export function main() {
         playlistManager.cueToPosition(trackTwo, Position.Next);
         expect(playlistManager.length()).toEqual(2);
         // shouldn't change current track
-        expect(playlistManager.currentIndex).toEqual(0);
+        expect(playlistManager.currentIndex()).toEqual(0);
         expect(playlistManager.currentTrack().title).toEqual("trackOne");
         // but next is changed
-        expect(playlistManager.at(playlistManager.currentIndex + 1).title).toEqual("trackTwo");
+        expect(playlistManager.at(playlistManager.currentIndex() + 1).title).toEqual("trackTwo");
 
         // queue next again
         playlistManager.cueToPosition(trackThree, Position.Next);
         expect(playlistManager.length()).toEqual(3);
         // shouldn't change current track
-        expect(playlistManager.currentIndex).toEqual(0);
+        expect(playlistManager.currentIndex()).toEqual(0);
         expect(playlistManager.currentTrack().title).toEqual("trackOne");
         // but next is changed
-        expect(playlistManager.at(playlistManager.currentIndex + 1).title).toEqual("trackThree");
+        expect(playlistManager.at(playlistManager.currentIndex() + 1).title).toEqual("trackThree");
 
         // queue current index
         playlistManager.cueToPosition(trackThree, Position.Current);
         expect(playlistManager.length()).toEqual(4);
-        expect(playlistManager.currentIndex).toEqual(0);
+        expect(playlistManager.currentIndex()).toEqual(0);
         expect(playlistManager.currentTrack().title).toEqual("trackThree");
         expect(playlistManager.at(1).title).toEqual("trackOne");
 
         // change current index
-        playlistManager.currentIndex = 3;
-        expect(playlistManager.currentIndex).toEqual(3);
+        playlistManager.setCurrentIndex(3);
+        expect(playlistManager.currentIndex()).toEqual(3);
         expect(playlistManager.at(0).title).toEqual("trackThree");
         expect(playlistManager.at(1).title).toEqual("trackOne");
         expect(playlistManager.at(2).title).toEqual("trackThree");

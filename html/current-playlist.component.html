@@ -3,12 +3,12 @@
         <tbody>
             <td *ngFor='let track of playlistService.manager.tracks; let i = index'>
                 <track-detail
-                  *ngIf="i == playlistService.manager.currentIndex" 
+                  *ngIf="i == playlistService.manager.currentIndex()" 
                   class="selected"
                   [track]="track"></track-detail>
 
                 <track-detail
-                  *ngIf="i != playlistService.manager.currentIndex"
+                  *ngIf="i != playlistService.manager.currentIndex()"
                   [track]="track"
                   (click)="selectedTrackIndex(i)"></track-detail>
             </td>
