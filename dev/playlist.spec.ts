@@ -17,29 +17,29 @@ export function main() {
     beforeEach(() => {
         playlist = new Playlist();
         
-        trackOne = {
-            id: { id: "1", source: "" },
-            title: "trackOne",
-            duration: { millisecond: 0 },
-            thumbnail: { default: "", high: "" },
-            date: new Date()
-        };
+        trackOne = new Track(
+            { id: "1", source: "" },
+            "trackOne",
+            { millisecond: 0 },
+            { default: "", high: "" },
+            new Date()
+        );
         
-        trackTwo = {
-            id: { id: "2", source: "" },
-            title: "trackTwo",
-            duration: { millisecond: 0 },
-            thumbnail: { default: "", high: "" },
-            date: new Date()
-        };
+        trackTwo = new Track(
+            { id: "2", source: "" },
+            "trackTwo",
+            { millisecond: 0 },
+            { default: "", high: "" },
+            new Date()
+        );
         
-        trackThree = {
-            id: { id: "3", source: "" },
-            title: "trackThree",
-            duration: { millisecond: 0 },
-            thumbnail: { default: "", high: "" },
-            date: new Date()
-        };
+        trackThree = new Track(
+            { id: "3", source: "" },
+            "trackThree",
+            { millisecond: 0 },
+            { default: "", high: "" },
+            new Date()
+        );
     });
 
     it('cue and remove tracks', () => {

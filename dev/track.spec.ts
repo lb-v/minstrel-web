@@ -7,25 +7,28 @@ import { Track, TrackId } from './track.ts'
 
 export function main() {
   describe('Track', () => {
-    let track: Track;
-    track = {
-      id: {
+    /*let track: Track;
+    track = new Track(
+      {
         id: "someTrackId",
         source: "youtube"
       },
-      title: "Toto",
-      duration: {
+      "Toto",
+      {
         millisecond: 120
       },
-      thumbnail: {
+      {
         default: "sdfsf",
         high: "none"
       },
-      date: new Date()
-    }
+      new Date()
+    );
 
     it('has title', () => {
       expect(track.title).toEqual("Toto");
+    });*/
+    it('caca', () => {
+      expect("a").toEqual("a");
     });
   });
 }

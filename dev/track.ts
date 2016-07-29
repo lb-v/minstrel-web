@@ -1,9 +1,34 @@
 export class Track {
-  id: TrackId;
-  duration: Duration;
-  title: string;
-  thumbnail: Thumbnail;
-  date: Date;
+  public id: TrackId;
+  public duration: Duration;
+  public title: string;
+  public thumbnail: Thumbnail;
+  public date: Date;
+
+  constructor(id: TrackId, 
+              title: string, 
+              duration: Duration, 
+              thumbnail: Thumbnail, 
+              date: Date) {
+    this.id = id;
+    this.duration = duration;
+    this.title = title;
+    this.thumbnail = thumbnail;
+    this.date = date;  
+  }
+
+  load() {
+
+  }
+  play() {
+
+  }
+  pause() {
+    
+  }
+  seekTo(millisecond: Number) {
+
+  }
 }
 
 export class TrackId {

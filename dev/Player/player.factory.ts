@@ -7,6 +7,7 @@ export class PlayerFactory {
     private services: string[] = [];
 
     // TODO: shouldn't be here. Register should be done from each player
+    // idea: in boot.ts, provide the PlayerFactory with the pre registered players
     constructor() {
         this.register(new YouTubePlayer(), "YouTube");
     }
