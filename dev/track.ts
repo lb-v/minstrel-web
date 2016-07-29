@@ -1,15 +1,20 @@
+import {PlayerFactory} from "./Player/player.factory";
+
 export class Track {
   public id: TrackId;
   public duration: Duration;
   public title: string;
   public thumbnail: Thumbnail;
   public date: Date;
+  private factory: PlayerFactory;
 
-  constructor(id: TrackId, 
+  constructor(playerFactory: PlayerFactory,
+              id: TrackId, 
               title: string, 
               duration: Duration, 
               thumbnail: Thumbnail, 
               date: Date) {
+    this.factory = playerFactory;
     this.id = id;
     this.duration = duration;
     this.title = title;
@@ -18,7 +23,7 @@ export class Track {
   }
 
   load() {
-
+    
   }
   play() {
 

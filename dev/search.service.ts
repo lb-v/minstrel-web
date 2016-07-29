@@ -3,10 +3,11 @@ import {Http, Response} from '@angular/http';
 
 import {Track, TrackId, TrackIdList} from './track';
 import {Observable} from 'rxjs/Observable';
+import {PlayerFactory} from './Player/player.factory';
 
 @Injectable()
 export class SearchService {
-    constructor (private http: Http) {
+    constructor (private http: Http, private playerFactory: PlayerFactory) {
     }
 
     private serverUrl = 'http://51.254.143.122:8080/v1/'
@@ -43,7 +44,12 @@ export class SearchService {
         if (body.length != 1) {
             return {};
         }
-        return body[0];
+        return new Track(this.playerFactory, 
+                         body[0].id,
+                         body[0].title,
+                         body[0].duration, 
+                         body[0].thumbnail,
+                         new Date());
     }
 
     private handleError (error: any) {

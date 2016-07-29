@@ -17,6 +17,7 @@ import 'rxjs/Rx'
 import {SearchService} from './search.service';
 import {SearchComponent} from './search.component';
 import {Track, TrackId, TrackIdList} from './track';
+import {PlayerFactory} from "./Player/player.factory";
 
 export function main() {
   describe('Search Service', () => {
@@ -25,7 +26,8 @@ export function main() {
       return [
         HTTP_PROVIDERS,
         { provide: XHRBackend, useClass: MockBackend },
-        SearchService
+        SearchService,
+        provide(PlayerFactory, {useValue: null})
       ];
     });
 

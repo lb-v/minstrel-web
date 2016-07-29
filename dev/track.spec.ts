@@ -7,8 +7,8 @@ import { Track, TrackId } from './track.ts'
 
 export function main() {
   describe('Track', () => {
-    /*let track: Track;
-    track = new Track(
+    // Useless dummy test
+    /*let track: Track = new Track(null, 
       {
         id: "someTrackId",
         source: "youtube"
@@ -27,8 +27,5 @@ export function main() {
     it('has title', () => {
       expect(track.title).toEqual("Toto");
     });*/
-    it('caca', () => {
-      expect("a").toEqual("a");
-    });
   });
 }
