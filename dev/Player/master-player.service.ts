@@ -39,11 +39,11 @@ export class MasterPlayerService implements PlaylistEventListener {
 
     }
 
-    currentTimeMilliseconds() {
+    currentTimeMilliseconds() : number {
         if (this.playlist.length() == 0) {
             return 0;
         }
-        this.playlist.currentTrack().currentTimeMilliseconds();
+        return this.playlist.currentTrack().currentTimeMilliseconds();
     }
 
     durationMilliseconds() {

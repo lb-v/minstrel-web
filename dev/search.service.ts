@@ -45,7 +45,7 @@ export class SearchService {
         }
         return new Track(body[0].id,
                          body[0].title,
-                         body[0].duration, 
+                         {millisecond: body[0].duration}, 
                          body[0].thumbnail,
                          new Date());
     }
