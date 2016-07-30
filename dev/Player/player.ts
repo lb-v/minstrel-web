@@ -3,4 +3,5 @@ export declare abstract class Player {
     abstract play();
     abstract pause();
     abstract seekTo(millisecond: Number);
+    abstract currentTimeMilliseconds() : number;
 }

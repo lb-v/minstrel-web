@@ -38,4 +38,18 @@ export class MasterPlayerService implements PlaylistEventListener {
     previous() {
 
     }
+
+    currentTimeMilliseconds() {
+        if (this.playlist.length() == 0) {
+            return 0;
+        }
+        this.playlist.currentTrack().currentTimeMilliseconds();
+    }
+
+    durationMilliseconds() {
+        if (this.playlist.length() == 0) {
+            return 0;
+        }
+        return this.playlist.currentTrack().duration.millisecond;
+    }
 }

@@ -43,6 +43,9 @@ export class Track {
     // TODO: if loaded
     this.getPlayer().seekTo(millisecond);
   }
+  currentTimeMilliseconds() : number {
+    return this.getPlayer().currentTimeMilliseconds();
+  }
 }
 
 export class TrackId {

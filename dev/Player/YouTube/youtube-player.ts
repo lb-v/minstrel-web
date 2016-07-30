@@ -6,10 +6,13 @@ import {Player} from "../player.ts";
 export class YouTubePlayer implements Player {
     private player: YT.Player = null;
 
+    private kDefaultHeight = '195';
+    private kDefaultWidth = '320';
+
     init(elementId: string) {
         this.player = new window.YT.Player(elementId, {
-            height: '390',
-            width: '640',
+            height: this.kDefaultHeight,
+            width: this.kDefaultWidth,
             videoId: ''
         });
     }
@@ -28,5 +31,8 @@ export class YouTubePlayer implements Player {
     }
     seekTo(millisecond: Number) {
         console.log("YouTube seek");
+    }
+    currentTimeMilliseconds() : number {
+        return this.player.getCurrentTime() * 1000;
     }
 }
