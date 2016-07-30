@@ -49,7 +49,7 @@ export class SeekbarComponent implements OnInit {
     }
 
     releaseSeekbar() {
-        let milliseconds = this.millisecondsToPosition(this.displayedValue);
+        let milliseconds = this.positionToMilliseconds(this.displayedValue);
 
         this.valueChange.emit({
             value: milliseconds

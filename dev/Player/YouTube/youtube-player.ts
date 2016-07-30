@@ -30,7 +30,7 @@ export class YouTubePlayer implements Player {
         this.player.pauseVideo();
     }
     seekTo(millisecond: Number) {
-        console.log("YouTube seek");
+        this.player.seekTo(millisecond / 1000);
     }
     currentTimeMilliseconds() : number {
         return this.player.getCurrentTime() * 1000;
