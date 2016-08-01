@@ -39,7 +39,7 @@ export class Track {
     // TODO: if loaded
     this.getPlayer().pause();
   }
-  seekTo(millisecond: Number) {
+  seekTo(millisecond: number) {
     // TODO: if loaded
     this.getPlayer().seekTo(millisecond);
   }

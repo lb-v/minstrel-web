@@ -24,7 +24,7 @@ export class MasterPlayerService implements PlaylistEventListener {
         this.playlist.currentTrack().pause();
     }
 
-    seekTo(millisecond: Number) {
+    seekTo(millisecond: number) {
         if (this.playlist.length() == 0) {
             return;
         }

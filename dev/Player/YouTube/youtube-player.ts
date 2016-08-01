@@ -9,12 +9,15 @@ export class YouTubePlayer implements Player {
     private kDefaultHeight = '195';
     private kDefaultWidth = '320';
 
+    private state: YouTubePlayerState = 0;
+
     init(elementId: string) {
         this.player = new window.YT.Player(elementId, {
             height: this.kDefaultHeight,
             width: this.kDefaultWidth,
             videoId: ''
         });
+        this.player.addEventListener("onStateChange", this.onStateChange)
     }
     load(id: string) {
         if (this.player == null) {
@@ -29,10 +32,23 @@ export class YouTubePlayer implements Player {
     pause() {
         this.player.pauseVideo();
     }
-    seekTo(millisecond: Number) {
+    seekTo(millisecond: number) {
         this.player.seekTo(millisecond / 1000);
     }
     currentTimeMilliseconds() : number {
         return this.player.getCurrentTime() * 1000;
     }
+
+    onStateChange(event: YT.EventArgs) {
+        console.log(event);
+    }
+}
+
+enum YouTubePlayerState {
+    Unstarted = -1,
+    Stopped = 0,
+    Playing = 1
+    Paused = 2,
+    Buffering = 3,
+    Cued = 5
 }
