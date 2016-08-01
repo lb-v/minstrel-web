@@ -54,14 +54,12 @@ export class SearchResultComponent implements SearchEventListener {
     }
 
     addTrackIds(trackIds: TrackId[]) {
-        for (var index = 0; index < trackIds.length; index++) {
-            var trackObs = this.searchService.getTrack(trackIds[index]);
-            trackObs.subscribe(
-                (track: Track) => {
-                    this.onTrackFound(track);
-                }
-            );
-        }
+        var trackObs = this.searchService.getTracks(trackIds);
+        trackObs.subscribe(
+            (tracks: Track[]) => {
+                this.onTracksFound(tracks);
+            }
+        );
     }
 
     cueToPlaylist(track: Track) {
@@ -78,11 +76,13 @@ export class SearchResultComponent implements SearchEventListener {
         this.nextPageToken = nextPageToken;
     }
 
-    onTrackFound(track: Track) {
-        if (track == null) {
+    onTracksFound(tracks: Track[]) {
+        if (tracks == null) {
             return;
         }
-        track.init(this.playerFactory);
-        this.displayedTracks.push(track);
+        for (var index=0; index<tracks.length; index++) {
+            tracks[index].init(this.playerFactory);
+            this.displayedTracks.push(tracks[index]);
+        }
     }
 }

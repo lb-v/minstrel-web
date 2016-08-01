@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 export declare abstract class SearchEventListener {
     abstract onNewQueryStarted(keyword: string);
     abstract onNextPageTokenChanged(nextPageToken: string);
-    abstract onTrackFound(track: Track);
+    abstract onTracksFound(tracks: Track[]);
 }
 
 @Injectable()
@@ -41,18 +41,16 @@ export class SearchService {
                 this.eventListener.onNextPageTokenChanged(trackIdList.NextPageToken);
 
                 // find tracks
-                for (var index = 0; index < trackIdList.IDs.length; index++) {
-                    var trackObs = this.getTrack(trackIdList.IDs[index]);
-                    trackObs.subscribe( 
-                        (track: Track) => {
-                            // notify of found track
-                            if (this.eventListener == null) {
-                                return;
-                            }    
-                            this.eventListener.onTrackFound(track);
+                var trackObs = this.getTracks(trackIdList.IDs);
+                trackObs.subscribe( 
+                    (tracks: Track[]) => {
+                        // notify of found track
+                        if (this.eventListener == null) {
+                            return;
                         }
-                    );
-                }
+                        this.eventListener.onTracksFound(tracks);
+                    }
+                );
             }
         );
     }
@@ -70,9 +68,13 @@ export class SearchService {
                         .catch(this.handleError);
     }
 
-    getTrack(id: TrackId): Observable<Track> {
-        return this.http.get(this.serverUrl + "Tracks?ids=" + JSON.stringify(id))
-                        .map(this.extractTrack)
+    getTracks(ids: TrackId[]): Observable<Track[]> {
+        var stringIds = "";
+        for (var index=0; index < ids.length; index++) {
+            stringIds = stringIds + JSON.stringify(ids[index]);
+        }
+        return this.http.get(this.serverUrl + "Tracks?ids=" + stringIds)
+                        .map(this.extractTracks)
                         .catch(this.handleError);
     }
 
@@ -83,17 +85,17 @@ export class SearchService {
         };
     }
 
-    private extractTrack(res: Response) {
+    private extractTracks(res: Response) {
         let body = res.json();
-        // should always contain only one entry. If not, that's an error
-        if (body.length != 1) {
-            return {};
+        var tracks: Track[] = [];
+        for (var index=0; index < body.length; index++) {
+            tracks.push(new Track(body[index].id,
+                                  body[index].title,
+                                  {millisecond: body[index].duration}, 
+                                  body[index].thumbnail,
+                                  new Date()));
         }
-        return new Track(body[0].id,
-                         body[0].title,
-                         {millisecond: body[0].duration}, 
-                         body[0].thumbnail,
-                         new Date());
+        return tracks;
     }
 
     private handleError (error: any) {

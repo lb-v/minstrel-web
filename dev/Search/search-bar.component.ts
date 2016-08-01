@@ -20,9 +20,7 @@ export class SearchBarComponent {
     var observable = this.searchService.getTrackIds(this.keyword);
     observable.subscribe(
       (trackIdList: TrackIdList) => {
-        for (var index = 0; index < trackIdList.IDs.length; index++) {
-          this.searchService.getTrack(trackIdList.IDs[index]);
-        }
+        this.searchService.getTracks(trackIdList.IDs);
       }
     );
   }

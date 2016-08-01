@@ -115,9 +115,10 @@ export function main() {
           id: "sometrackid",
           source: "somesourceid"
       }
-      searchService.getTrack(dummyTrack).subscribe((track: Track) => {
-        expect(track.id.source).toBe("YouTube");
-        expect(track.thumbnail.default).toBe("test.png");
+      searchService.getTracks(dummyTrack).subscribe((tracks: Track[]) => {
+        expect(tracks.length).toBe(1);
+        expect(tracks[0].id.source).toBe("YouTube");
+        expect(tracks[0].thumbnail.default).toBe("test.png");
       });
     }));
 
