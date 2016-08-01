@@ -42,11 +42,7 @@ export class SearchResultComponent implements SearchEventListener {
             var trackObs = this.searchService.getTrack(trackIds[index]);
             trackObs.subscribe(
                 (track: Track) => {
-                    if (track == null) {
-                        return;
-                    }
-                    track.init(this.playerFactory);
-                    this.displayedTracks.push(track);
+                    this.onTrackFound(track);
                 }
             );
         }
@@ -67,6 +63,10 @@ export class SearchResultComponent implements SearchEventListener {
     }
 
     onTrackFound(track: Track) {
+        if (track == null) {
+            return;
+        }
+        track.init(this.playerFactory);
         this.displayedTracks.push(track);
     }
 }
