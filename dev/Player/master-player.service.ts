@@ -2,8 +2,15 @@ import {PlaylistManager} from '../Playlist/playlist-manager';
 import {PlaylistEventListener} from '../Playlist/playlist-event-listener';
 import {PlayerEventListener} from './player';
 
+export enum Status {
+    Paused = 0,
+    Playing = 1
+}
+
 export class MasterPlayerService implements PlaylistEventListener,
                                             PlayerEventListener {
+    private status_: Status = Status.Paused;                                        
+
     constructor(private playlist: PlaylistManager) {
         playlist.setEventListener(this);
     }
@@ -57,6 +64,10 @@ export class MasterPlayerService implements PlaylistEventListener,
         return this.playlist.currentTrack().duration.millisecond;
     }
 
+    status() {
+        return this.status_;
+    }
+
     // playlist event listener
     onCurrentTrackChanged() {
         // TODO: if is playing
@@ -65,13 +76,14 @@ export class MasterPlayerService implements PlaylistEventListener,
 
     // player event listener
     onPlaying() {
-        console.log("playing");
+        this.status_ = Status.Playing;
     }
     onPaused() {
-        console.log("paused");
+        this.status_ = Status.Paused;
     }
     onStopped() {
         if (!this.playlist.hasNext()) {
+            this.status_ = Status.Paused;
             return;
         }
         this.next();

@@ -1,0 +1,5 @@
+<div class="controls">
+    <button *ngIf="isPlaying()" (click)="pause()">Pause</button>
+    <button *ngIf="!isPlaying()" (click)="play()">Play</button>
+    <seekbar (valueChange)="seekValueChange($event);"></seekbar>
+</div>

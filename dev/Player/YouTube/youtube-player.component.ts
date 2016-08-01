@@ -7,7 +7,9 @@ import {YouTubePlayer} from './youtube-player';
 @Component({
     selector: 'youtube-player',
     template: ` 
-        <div id="player" style="pointer-events: none"></div>
+        <div class="video">
+            <div id="player" style="pointer-events: none"></div>
+        </div>
     `
 })
 
