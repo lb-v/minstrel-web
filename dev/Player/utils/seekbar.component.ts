@@ -1,14 +1,16 @@
-import {Component, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Output, EventEmitter, OnInit, ElementRef} from '@angular/core';
+import {document} from '@angular/platform-browser/src/facade/browser';
 
 import {MasterPlayerService} from '../master-player.service';
 
 @Component({
     selector: 'seekbar',
     template: `
-        <input type="range"
-         [(ngModel)]="displayedValue" 
-         (mousedown)="pressSeekbar()" 
-         (mouseup)="releaseSeekbar()">
+        <progress id="range" class="seekbar" 
+         value="{{displayedValue}}" 
+         max="100" 
+         (mousedown)="releaseSeekbar($event)"
+         ></progress>
     `,
     outputs: ['valueChange']
 })
@@ -17,12 +19,14 @@ export class SeekbarComponent implements OnInit {
     public valueChange = new EventEmitter();
 
     private displayedValue: number = 0;
-    private isEdditing = false;
+    private range: ElementRef;
 
     constructor(private masterPlayerService: MasterPlayerService) {}
 
     ngOnInit() {
         this.scheduleUpdatePosition();
+        this.range = new ElementRef(document.getElementById("range"));
+        console.log(this.range);
     }
 
     scheduleUpdatePosition() {
@@ -30,11 +34,6 @@ export class SeekbarComponent implements OnInit {
     }
 
     updatePosition() {
-        if (this.isEdditing) {
-            this.scheduleUpdatePosition();
-            this.displayedValue = 0;
-            return;
-        }
         let milliseconds = this.masterPlayerService.currentTimeMilliseconds();
         if (milliseconds == 0) {
             this.displayedValue = 0;
@@ -44,17 +43,16 @@ export class SeekbarComponent implements OnInit {
         this.scheduleUpdatePosition();
     }
 
-    pressSeekbar() {
-        this.isEdditing = true;
-    }
+    releaseSeekbar(event) {
+        var x = event.pageX - this.range.nativeElement.offsetLeft;
+        var width = this.range.nativeElement.offsetWidth;
+        var value = (x * 100) / width;
 
-    releaseSeekbar() {
-        let milliseconds = this.positionToMilliseconds(this.displayedValue);
+        let milliseconds = this.positionToMilliseconds(value);
 
         this.valueChange.emit({
             value: milliseconds
         });
-        this.isEdditing = false;
     }
     
     positionToMilliseconds(position: number) {

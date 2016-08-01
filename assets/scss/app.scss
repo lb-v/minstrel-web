@@ -124,3 +124,8 @@ master-player .controls .play-button {
 master-player .controls .transport-button {
   width: 20%;
 }
+
+seekbar > progress {
+  width: 90%;
+  height: 7px;
+}
