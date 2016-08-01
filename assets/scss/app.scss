@@ -1,3 +1,6 @@
+$sidebar-width: 200px;
+$playlist-height: 120px;
+
 body {
   padding: 32px;
   margin: 32px;
@@ -41,6 +44,30 @@ track-detail.selected .thumbnail {
   background-color: #89A8B3;
 }
 
+/* Side bar  bottom */
 #sidebar {
-  width: 200px;
+  width: $sidebar-width;
+  height: 100%;
+}
+#sidebar_bottom {
+  position: absolute;
+  display: inline-block;
+  bottom: 0;
+}
+
+/* playlist */
+#playlist {
+  margin-left: $sidebar-width;
+  height: $playlist-height;
+}
+
+/* center */
+.main-content {
+  margin-left: $sidebar-width;
+  margin-bottom: $playlist-height;
+}
+
+/* Search bar */
+input[type="search"] {
+  width: 80%;
 }

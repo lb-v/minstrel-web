@@ -1,15 +1,18 @@
-
-
 <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar">
     <ul class="nav sidebar-nav">
         <li class="sidebar-brand">Minstrel</li>
         <li><search-bar></search-bar></li>
+    </ul>
+    <ul id="sidebar_bottom" class="nav nav-sidebar">
         <li><youtube-player></youtube-player></li>
         <li><master-player></master-player></li>
     </ul>
 </nav>
 
-<div class="container">
-    <search-result></search-result>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="playlist">
     <current-playlist></current-playlist>
+</nav>
+
+<div class="container main-content">
+    <search-result></search-result>
 </div>

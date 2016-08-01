@@ -1,4 +1,4 @@
-<div *ngFor='let displayedTrack of displayedTracks'>
+<div (window:scroll)="onScroll($event)" *ngFor='let displayedTrack of displayedTracks'>
     <track-detail 
       [track]="displayedTrack" 
       (click)="cueToPlaylist(displayedTrack)"

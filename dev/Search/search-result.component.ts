@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {window, document} from '@angular/platform-browser/src/facade/browser';
+
 import {Track, TrackId, TrackIdList} from '../track';
 import {TrackDetailComponent} from '../track-detail.component'
 import {SearchService, SearchEventListener} from './search.service';
@@ -19,12 +21,26 @@ export class SearchResultComponent implements SearchEventListener {
 
     private lastSearchKeyword = "";
     private nextPageToken = "";
+    
+    private lastLoadHeight = 0;
 
     constructor (private searchService: SearchService, 
                  private playlistService: PlaylistService,
                  private playerFactory: PlayerFactory) {
                      searchService.setEventListener(this);
                  }
+
+    // onScroll handles the scroll event to allow infinite scroll through results
+    onScroll(event) {
+        // if the window still has the same height as last loadNextPage call, do nothing
+        if (this.lastLoadHeight == document.body.offsetHeight) {
+            return;
+        }
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            this.lastLoadHeight = document.body.offsetHeight;
+            this.loadNextPage();
+        }
+    }
 
     loadNextPage() {
         var observable = this.searchService.getNextTrackIds(this.lastSearchKeyword, 
