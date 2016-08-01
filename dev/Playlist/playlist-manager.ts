@@ -69,7 +69,7 @@ export class PlaylistManager extends Playlist {
         return (this.currentIndex() + 1) < this.length();
     }
     hasPrevious() {
-        return (this.currentIndex() - 1) > 0;
+        return (this.currentIndex() - 1) >= 0;
     }
 }
 

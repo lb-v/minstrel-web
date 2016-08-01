@@ -14,9 +14,9 @@ export class SearchBarComponent {
   public keyword = "";
   constructor (private searchService: SearchService) {}
 
-  search() {
+  search(event: KeyboardEvent) {
     // check if key is enter
-    if(event.keyCode != 13) {
+    if(event.keyCode != 13 || this.keyword == "") {
       return;
     }
     this.searchService.search(this.keyword);

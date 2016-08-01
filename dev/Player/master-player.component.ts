@@ -29,4 +29,12 @@ export class MasterPlayerComponent {
     pause() {
         this.masterPlayerService.pause();
     }
+
+    previous() {
+        this.masterPlayerService.previous();
+    }
+
+    next() {
+        this.masterPlayerService.next();
+    }
 }

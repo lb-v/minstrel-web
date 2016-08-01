@@ -1,5 +1,10 @@
 <div class="controls">
-    <button *ngIf="isPlaying()" (click)="pause()">Pause</button>
-    <button *ngIf="!isPlaying()" (click)="play()">Play</button>
     <seekbar (valueChange)="seekValueChange($event);"></seekbar>
+
+    <div class="buttons">
+        <input (click)="previous()" src="img/previous.png" type="image" class="transport-button"/>
+        <input *ngIf="isPlaying()" (click)="pause()" src="img/pause.png" type="image" class="play-button"/>
+        <input *ngIf="!isPlaying()" (click)="play()" src="img/play.png" type="image" class="play-button"/>
+        <input (click)="next()" src="img/next.png" type="image" class="transport-button"/>
+    <div class="buttons">
 </div>

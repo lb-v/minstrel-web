@@ -104,10 +104,23 @@ youtube-player .video {
   text-align: center;
   padding: 10px;
   border: 1px solid gray;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 master-player .controls {
   padding: 10px;
   text-align: center;
 } 
+
+master-player .controls .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+master-player .controls .play-button {
+  width: 40%;
+}
+master-player .controls .transport-button {
+  width: 20%;
+}
