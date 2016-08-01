@@ -31,7 +31,7 @@ export class SearchResultComponent implements SearchEventListener {
                  }
 
     // onScroll handles the scroll event to allow infinite scroll through results
-    onScroll(event) {
+    onScroll() {
         // if the window still has the same height as last loadNextPage call, do nothing
         if (this.lastLoadHeight == document.body.offsetHeight) {
             return;
@@ -84,5 +84,7 @@ export class SearchResultComponent implements SearchEventListener {
             tracks[index].init(this.playerFactory);
             this.displayedTracks.push(tracks[index]);
         }
+        // make sure we load enough data to fill the page 
+        this.onScroll();
     }
 }
