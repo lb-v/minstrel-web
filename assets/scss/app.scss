@@ -68,14 +68,26 @@ track-detail.selected .thumbnail {
 }
 
 /* Search bar */
+$searchbar-padding-right: 10px;
+
+.search-bar > button {
+  position:absolute;
+  top: 7px;
+  right: 30px;
+  background: none;
+  border: none;
+}
+
+
 input[type="search"] {
   width: 80%;
+  height: 30px;
   border: none;
   font-size: 10pt;
   padding-left: 20px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 .center {
@@ -87,6 +99,7 @@ input[type="search"] {
   color: white;
   font-style: bold;
   font-size: 20pt;
+  margin-bottom: 10px;
   padding: 10px;
 }
 .sidebar-brand > img {

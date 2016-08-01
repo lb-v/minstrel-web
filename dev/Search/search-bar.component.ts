@@ -6,7 +6,10 @@ import {SearchService} from './search.service';
 @Component({
   selector: 'search-bar',
   template: `
-    <input type="search"  [(ngModel)]='keyword' placeholder="Search" (keydown)="search($event)"/>
+    <div class="search-bar">
+      <input type="search"  [(ngModel)]='keyword' placeholder="Search" (keydown)="searchWithEvent($event)"/>
+      <button class="glyphicon glyphicon-search" (click)="search()"></button>
+    <div>
   `
 })
 
@@ -14,11 +17,15 @@ export class SearchBarComponent {
   public keyword = "";
   constructor (private searchService: SearchService) {}
 
-  search(event: KeyboardEvent) {
+  searchWithEvent(event: KeyboardEvent) {
     // check if key is enter
     if(event.keyCode != 13 || this.keyword == "") {
       return;
     }
+    this.search();
+  }
+
+  search() {
     this.searchService.search(this.keyword);
     var observable = this.searchService.getTrackIds(this.keyword);
     observable.subscribe(
