@@ -64,6 +64,13 @@ export class PlaylistManager extends Playlist {
     currentTrack() {
         return this.at(this.currentIndex_);
     }
+
+    hasNext() {
+        return (this.currentIndex() + 1) < this.length();
+    }
+    hasPrevious() {
+        return (this.currentIndex() - 1) > 0;
+    }
 }
 
 export enum Position {

@@ -17,11 +17,15 @@ var gPlayerFactory = new PlayerFactory();
 var gYouTubePlayer = new YouTubePlayer();
 gPlayerFactory.register(gYouTubePlayer, "YouTube");
 
+// master player is a player event listener
+var gMasterPlayer = new MasterPlayerService(gPlaylistService.manager);
+gYouTubePlayer.setPlayerEventListener(gMasterPlayer);
+
 bootstrap(AppComponent, 
           [ 
             HTTP_PROVIDERS, 
             provide(PlaylistService, {useValue: gPlaylistService}) ,
             provide(PlayerFactory, {useValue: gPlayerFactory}),
             provide(YouTubePlayer, {useValue: gYouTubePlayer}),
-            provide(MasterPlayerService, {useValue: new MasterPlayerService(gPlaylistService.manager)})
+            provide(MasterPlayerService, {useValue: gMasterPlayer})
           ]);
