@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 
-import {SearchComponent} from './search.component';
+import {SearchResultComponent} from './Search/search-result.component';
+import {SearchBarComponent} from './Search/search-bar.component';
 import {CurrentPlaylistComponent} from './Playlist/current-playlist.component';
 import {MasterPlayerComponent} from './Player/master-player.component';
 import {YouTubePlayerComponent} from './Player/YouTube/youtube-player.component';
@@ -11,7 +12,8 @@ import './rxjs-operators';
     selector: 'my-app',
     templateUrl: 'html/app.component.html',
     directives: [
-        SearchComponent,
+        SearchResultComponent,
+        SearchBarComponent,
         CurrentPlaylistComponent,
         MasterPlayerComponent,
         YouTubePlayerComponent

@@ -15,9 +15,8 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import 'rxjs/Rx'
 
 import {SearchService} from './search.service';
-import {SearchComponent} from './search.component';
-import {Track, TrackId, TrackIdList} from './track';
-import {PlayerFactory} from "./Player/player.factory";
+import {Track, TrackId, TrackIdList} from '../track';
+import {PlayerFactory} from "../Player/player.factory";
 
 export function main() {
   describe('Search Service', () => {

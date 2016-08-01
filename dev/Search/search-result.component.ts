@@ -1,21 +1,19 @@
 import {Component} from '@angular/core';
-import {Track, TrackId, TrackIdList} from './track';
-import {TrackDetailComponent} from './track-detail.component'
-import {SearchService} from './search.service';
+import {Track, TrackId, TrackIdList} from '../track';
+import {TrackDetailComponent} from '../track-detail.component'
+import {SearchService, SearchEventListener} from './search.service';
 
-import {Position} from './Playlist/playlist-manager';
-import {PlaylistService} from './Playlist/playlist.service';
-import {PlayerFactory} from './Player/player.factory';
+import {Position} from '../Playlist/playlist-manager';
+import {PlaylistService} from '../Playlist/playlist.service';
+import {PlayerFactory} from '../Player/player.factory';
 
 @Component({
-  selector: 'search',
-  templateUrl: 'html/search.component.html',
-  directives: [TrackDetailComponent],
-  providers: [SearchService]
+  selector: 'search-result',
+  templateUrl: 'html/search-result.component.html',
+  directives: [TrackDetailComponent]
 })
 
-export class SearchComponent {
-    public keyword = "";
+export class SearchResultComponent implements SearchEventListener {
     public displayedTracks: Track[] = [];
     public errorMessage = "";
 
@@ -24,18 +22,9 @@ export class SearchComponent {
 
     constructor (private searchService: SearchService, 
                  private playlistService: PlaylistService,
-                 private playerFactory: PlayerFactory) {}
-
-    search() {
-        this.lastSearchKeyword = this.keyword;
-        var observable = this.searchService.getTrackIds(this.keyword);
-        observable.subscribe(
-            (trackIdList: TrackIdList) => {
-                this.nextPageToken = trackIdList.NextPageToken;
-                this.setTrackIds(trackIdList.IDs);
-            }
-        );
-    }
+                 private playerFactory: PlayerFactory) {
+                     searchService.setEventListener(this);
+                 }
 
     loadNextPage() {
         var observable = this.searchService.getNextTrackIds(this.lastSearchKeyword, 
@@ -46,11 +35,6 @@ export class SearchComponent {
                 this.addTrackIds(trackIdList.IDs);
             }
         );
-    }
-
-    setTrackIds(trackIds: TrackId[]) {
-        this.displayedTracks = [];
-        this.addTrackIds(trackIds);
     }
 
     addTrackIds(trackIds: TrackId[]) {
@@ -70,5 +54,19 @@ export class SearchComponent {
 
     cueToPlaylist(track: Track) {
         this.playlistService.manager.cueToPosition(track, Position.Next);
+    }
+
+    // search event listener
+    onNewQueryStarted(keyword: string) {
+        this.lastSearchKeyword = keyword;
+        this.displayedTracks = [];
+    }
+
+    onNextPageTokenChanged(nextPageToken: string) {
+        this.nextPageToken = nextPageToken;
+    }
+
+    onTrackFound(track: Track) {
+        this.displayedTracks.push(track);
     }
 }

@@ -10,6 +10,8 @@ import {Player} from "./Player/player";
 import {MasterPlayerService} from "./Player/master-player.service";
 import {YouTubePlayer} from "./Player/YouTube/youtube-player";
 
+import {SearchService} from './Search/search.service';
+
 var gPlaylistService = new PlaylistService();
 
 // register each player here
@@ -27,5 +29,6 @@ bootstrap(AppComponent,
             provide(PlaylistService, {useValue: gPlaylistService}) ,
             provide(PlayerFactory, {useValue: gPlayerFactory}),
             provide(YouTubePlayer, {useValue: gYouTubePlayer}),
-            provide(MasterPlayerService, {useValue: gMasterPlayer})
+            provide(MasterPlayerService, {useValue: gMasterPlayer}),
+            SearchService
           ]);

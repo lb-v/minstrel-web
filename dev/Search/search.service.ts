@@ -1,15 +1,61 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 
-import {Track, TrackId, TrackIdList} from './track';
+import {Track, TrackId, TrackIdList} from '../track';
 import {Observable} from 'rxjs/Observable';
+
+
+export declare abstract class SearchEventListener {
+    abstract onNewQueryStarted(keyword: string);
+    abstract onNextPageTokenChanged(nextPageToken: string);
+    abstract onTrackFound(track: Track);
+}
 
 @Injectable()
 export class SearchService {
-    constructor (private http: Http) {
+    private serverUrl = 'http://51.254.143.122:8080/v1/'
+    private eventListener: SearchEventListener = null;
+
+    constructor (private http: Http) {}
+
+    setEventListener(eventListener: SearchEventListener) {
+        this.eventListener = eventListener;
     }
 
-    private serverUrl = 'http://51.254.143.122:8080/v1/'
+    // TODO: factorize that monster function
+    search(keyword: string) {
+        // notify of new search first
+        if (this.eventListener == null) {
+            return;
+        }
+        this.eventListener.onNewQueryStarted(keyword);
+
+        // do the search
+        var observable = this.getTrackIds(keyword);
+        observable.subscribe(
+            (trackIdList: TrackIdList) => {
+                // notify of next page
+                if (this.eventListener == null) {
+                    return;
+                }       
+                this.eventListener.onNextPageTokenChanged(trackIdList.NextPageToken);
+
+                // find tracks
+                for (var index = 0; index < trackIdList.IDs.length; index++) {
+                    var trackObs = this.getTrack(trackIdList.IDs[index]);
+                    trackObs.subscribe( 
+                        (track: Track) => {
+                            // notify of found track
+                            if (this.eventListener == null) {
+                                return;
+                            }    
+                            this.eventListener.onTrackFound(track);
+                        }
+                    );
+                }
+            }
+        );
+    }
 
     getTrackIds(keyword: string): Observable<TrackIdList> {
         return this.http.get(this.serverUrl + "TrackIDs?q=" + keyword)
