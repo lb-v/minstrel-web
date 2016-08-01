@@ -6,8 +6,8 @@ import {Player, PlayerEventListener} from "../player.ts";
 export class YouTubePlayer implements Player {
     private player: YT.Player = null;
 
-    private kDefaultHeight = '195';
-    private kDefaultWidth = '320';
+    private kDefaultHeight = '120';
+    private kDefaultWidth = '200';
 
     private eventListener: PlayerEventListener = null;
 
